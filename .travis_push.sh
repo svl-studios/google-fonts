@@ -20,10 +20,11 @@ commit_fonts_file() {
 }
 
 upload_files() {
+    
   # Remove existing "origin"
   git remote rm origin
   # Add new "origin" with access token in the git URL for authentication
-  git remote add origin https://dovy:${NEW_GH_TOKEN}@github.com/svl-studios/google-fonts.git > /dev/null 2>&1
+  git remote add origin https://kprovance:${GF_TOKEN}@github.com/svl-studios/google-fonts.git > /dev/null 2>&1
   git push origin master --quiet > /dev/null 2>&1
 }
 
