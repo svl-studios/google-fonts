@@ -1,18 +1,4 @@
 <?php
-function var_export_min( $var, $return = false ) {
-	if ( is_array( $var ) ) {
-		$toImplode = array();
-		foreach ( $var as $key => $value ) {
-			$toImplode[] = var_export( $key, true ) . '=>' . var_export_min( $value, true );
-		}
-		$code = 'array(' . implode( ',', $toImplode ) . ')';
-		if ( $return )
-			return $code; else echo $code;
-	} else {
-		return var_export( $var, $return );
-	}
-	return false;
-}
 
 /**
  * getSubsets Function.
@@ -107,8 +93,7 @@ date_default_timezone_set( 'UTC' );
 $output = shell_exec( 'git log -1' );
 echo shell_exec( 'git checkout -f master' );
 $gFile             = dirname( __FILE__ ) . '/google_fonts.json';
-$gFilePHP          = dirname( __FILE__ ) . '/fonts.php';
-$gFileminPHP       = dirname( __FILE__ ) . '/fonts-min.php';
+$gFileminPHP       = dirname( __FILE__ ) . '/googlefonts.php';
 
 $fonts             = array();
 
@@ -141,6 +126,6 @@ $code = <<<PHP
 <?php
 // Last Updated : $cd
 defined( 'ABSPATH' ) || exit; 
-return json_decode( $data, true );
+return json_decode( '$data', true );
 PHP;
 file_put_contents( $gFileminPHP, $code );
