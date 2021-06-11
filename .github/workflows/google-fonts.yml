@@ -26,7 +26,7 @@ jobs:
       - name: File exists
         if: steps.check_files.outputs.files_exists == 'true'
         # Only runs if all of the files exists
-        run: git rm google_fonts.json && git commit -a -m "Delete" && git push "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" HEAD:master
+        # run: git rm google_fonts.json && git commit -a -m "Delete" && git push "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" HEAD:master
       
       - run: php ./run.php ${{ secrets.GOOGLE_TOKEN }}
         env:
