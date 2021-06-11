@@ -17,8 +17,7 @@ jobs:
       - run: php ./run.php ${{ secrets.GOOGLE_TOKEN }}
         env:
           GOOGLE_TOKEN: ${{secrets.GOOGLE_TOKEN}}
-      - run: git config --global user.email "support@svlstudios.com" && git config --global user.name "SVL Studios"
-      - run: git add -A -f
+      - run: git config --global user.email "support@svlstudios.com" && git config --global user.name "SVL Studios" && git add -A
       - run: git commit -m "Google Fonts Update: ${{ steps.date.outputs.date }} (Build $GITHUB_RUN_NUMBER)"
       - run: git push "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" HEAD:master
         env:
