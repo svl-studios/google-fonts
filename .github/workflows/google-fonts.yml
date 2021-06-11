@@ -14,11 +14,20 @@ jobs:
       - uses: nanasess/setup-php@master
         with:
           php-version: '7.4'
-          
+
       - run: git config --global user.email "support@svlstudios.com" && git config --global user.name "SVL Studios"
-      - run: git rm google_fonts.json
-      - run: git commit -a -m "Delete"
-      - run: git push "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" HEAD:master
+      
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "google_fonts.json"
+
+      - name: File exists
+        if: steps.check_files.outputs.files_exists == 'true'
+        # Only runs if all of the files exists
+        run: git rm google_fonts.json && git commit -a -m "Delete" && git push "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY" HEAD:master
+      
       - run: php ./run.php ${{ secrets.GOOGLE_TOKEN }}
         env:
           GOOGLE_TOKEN: ${{secrets.GOOGLE_TOKEN}}
