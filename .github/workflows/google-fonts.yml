@@ -16,7 +16,7 @@ jobs:
           php-version: '7.4'
           
       - run: git config --global user.email "support@svlstudios.com" && git config --global user.name "SVL Studios"
-      - run: git rm google_fonts.json
+      - run: git rm -f google_fonts.json
       
       - run: php ./run.php ${{ secrets.GOOGLE_TOKEN }}
         env:
